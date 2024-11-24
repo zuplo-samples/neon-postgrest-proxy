@@ -1,0 +1,72 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My Zuplo API"
+  },
+  "paths": {
+    "/api/{query}": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "get": {
+        "summary": "Safeguard DB Reads",
+        "description": "",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://neon-postgrest.zuplopreview.net"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "rate-limit-inbound"
+            ]
+          }
+        },
+        "operationId": "7e0fddb1-1ef3-473a-8318-9f88230fcbe4"
+      },
+      "post": {
+        "summary": "Safeguard DB Insertions",
+        "description": "",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://neon-postgrest.zuplopreview.net"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "rate-limit-inbound-post"
+            ]
+          }
+        },
+        "operationId": "3e06fb5c-6e17-4392-aa60-f003cbe43358"
+      },
+      "options": {
+        "summary": "CORS",
+        "description": "",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://neon-postgrest.zuplopreview.net"
+            }
+          },
+          "policies": {
+            "inbound": []
+          }
+        },
+        "operationId": "acc42f43-e386-45af-a617-96c0d137acac"
+      }
+    }
+  }
+}
